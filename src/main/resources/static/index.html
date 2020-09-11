@@ -16,6 +16,7 @@
 				bottom: 0;
 				width : 100%;
 				text-align: center;
+				padding: 15px;
 			}
 			.sayho-updown {
 				padding-top: 20px;
@@ -51,8 +52,15 @@
 			httpRequest.send({'test':'hello'});
 		};
 		var showAdd = function() {
+			document.getElementById("inpTitle").value = "";
 			$("#myModal").modal();
 		};
+		var register = function() {
+			
+		}
+		var addQuestionInput = function() {
+			
+		}
 		</script>
 	</head>
 	<body>
@@ -69,14 +77,14 @@
 				<div class="container sayho-updown">
 					<h3><strong>암기하기</strong></h3>
 					<p>암기할 질문/답 리스트를 저장하여, 무작위 퀴즈를 만듭니다.</p>
-					<button class="btn btn-primary" onClick="showAdd()">Create A Quiz</button>
+					<button class="btn btn-primary" onClick="showAdd()">퀴즈 생성하기</button>
 				</div>
 			</div>
 		</div>
 		<div id="quizlist">
 		</div>
 		<div class="sayho-footer bg-primary text-white">
-			<p>Footer</p>
+			<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank">eurowondollaryen</a>.</p>
 		</div>
 		<!-- The Modal -->
 		<div class="modal fade" id="myModal">
@@ -88,11 +96,20 @@
 					</div>
 					
 					<div class="modal-body">
-						ffff
+						<div class="container">
+							<div class="row">
+								<label for="inpTitle">제목</label>
+								<input class="form-control" type="text" placeholder="퀴즈의 제목을 입력하세요." id="inpTitle"/>
+								<button class="btn btn-primary" onClick="addQuestionInput()">질문 추가하기</button>
+							</div>
+							<div class="row" id="questionArea">
+							</div>
+						</div>
 					</div>
 			        
 			        <div class="modal-footer">
-			          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			        	<button type="button" class="btn btn-primary" onClick="register()" data-dismiss="modal">등록</button>
+			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			        </div>
 				</div>
 			</div>
