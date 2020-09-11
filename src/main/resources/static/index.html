@@ -15,8 +15,6 @@
 				left: 0;
 				bottom: 0;
 				width : 100%;
-				background-color: primary;
-				color: white;
 				text-align: center;
 			}
 			.sayho-updown {
@@ -26,6 +24,9 @@
 			.sayho-updown-1 {
 				padding-top: 10px;
 				padding-bottom: 10px;
+			}
+			h4 {
+				font-weight: bold;
 			}
 		</style>
 		<script>
@@ -49,6 +50,9 @@
 			httpRequest.open('POST', '/main', true);
 			httpRequest.send({'test':'hello'});
 		};
+		var showAdd = function() {
+			$("#myModal").modal();
+		};
 		</script>
 	</head>
 	<body>
@@ -65,14 +69,34 @@
 				<div class="container sayho-updown">
 					<h3><strong>암기하기</strong></h3>
 					<p>암기할 질문/답 리스트를 저장하여, 무작위 퀴즈를 만듭니다.</p>
-					<button class="btn btn-primary" onClick="showAdd()">퀴즈 추가하기</button>
+					<button class="btn btn-primary" onClick="showAdd()">Create A Quiz</button>
 				</div>
 			</div>
 		</div>
 		<div id="quizlist">
 		</div>
-		<div class="sayho-footer">
+		<div class="sayho-footer bg-primary text-white">
 			<p>Footer</p>
 		</div>
+		<!-- The Modal -->
+		<div class="modal fade" id="myModal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">퀴즈 생성하기</h4>
+						<button type="button" class="close" data-dismiss="modal">×</button>
+					</div>
+					
+					<div class="modal-body">
+						ffff
+					</div>
+			        
+			        <div class="modal-footer">
+			          <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+			        </div>
+				</div>
+			</div>
+		</div>
+		
 	</body>
 </html>
