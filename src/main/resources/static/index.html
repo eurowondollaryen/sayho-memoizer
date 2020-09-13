@@ -56,7 +56,32 @@
 			$("#myModal").modal();
 		};
 		var register = function() {
-			
+			if(document.getElementById("inpTitle").value === "") {
+				alert("제목을 입력해 주세요!");
+			} else {
+				$.ajax({
+					type: "post",
+					url: "/wr/selectWorkoutRecord",
+					data: requestData,
+					success: function(result) {
+						console.log('requesting workout record success!');
+						console.log(result);
+						global_workout_data = result.data;
+						for(var i = 0; i < global_workout_data.length; ++i) {
+							var targetCell = document.getElementById("cell" + global_workout_data[i]["wo_dt"]);
+							var wrElem = document.createElement("DIV");
+							wrElem.setAttribute("id", "wr" + i);
+							wrElem.classList.add("workout-record");
+							wrElem.setAttribute("onClick", "showWorkoutRecord(" + i + ")");
+							wrElem.innerHTML = global_workout_data[i]["part_main_nm"] + "-" + global_workout_data[i]["wo_nm_kor"];
+							targetCell.appendChild(wrElem);
+						}
+					},
+					error : function(xhr, textStatus, errorThrown) {
+						alert("운동 기록을 가져오는 데 실패했습니다..\n" + xhr.status + " " + xhr.statusText);
+					}
+				});
+			}
 		}
 		var addQuestionInput = function() {
 			
@@ -100,7 +125,6 @@
 							<div class="row">
 								<label for="inpTitle">제목</label>
 								<input class="form-control" type="text" placeholder="퀴즈의 제목을 입력하세요." id="inpTitle"/>
-								<button class="btn btn-primary" onClick="addQuestionInput()">질문 추가하기</button>
 							</div>
 							<div class="row" id="questionArea">
 							</div>
