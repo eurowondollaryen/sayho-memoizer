@@ -56,37 +56,36 @@
 			$("#myModal").modal();
 		};
 		var register = function() {
-			if(document.getElementById("inpTitle").value === "") {
+			var quizTitle = document.getElementById("inpTitle").value; 
+			if(quizTitle === "") {
 				alert("제목을 입력해 주세요!");
 			} else {
+				var requestData = {
+					"usrId" : "sehoakasayho",
+					"quizNm" : quizTitle
+				};
 				$.ajax({
 					type: "post",
 					url: "/quiz/regist",
 					data: requestData,
 					success: function(result) {
-						console.log('requesting workout record success!');
-						console.log(result);
-						global_workout_data = result.data;
-						for(var i = 0; i < global_workout_data.length; ++i) {
-							var targetCell = document.getElementById("cell" + global_workout_data[i]["wo_dt"]);
-							var wrElem = document.createElement("DIV");
-							wrElem.setAttribute("id", "wr" + i);
-							wrElem.classList.add("workout-record");
-							wrElem.setAttribute("onClick", "showWorkoutRecord(" + i + ")");
-							wrElem.innerHTML = global_workout_data[i]["part_main_nm"] + "-" + global_workout_data[i]["wo_nm_kor"];
-							targetCell.appendChild(wrElem);
-						}
+						console.log('insert result : ' + result);
 					},
 					error : function(xhr, textStatus, errorThrown) {
-						alert("운동 기록을 가져오는 데 실패했습니다..\n" + xhr.status + " " + xhr.statusText);
+						alert("failed to insert data...\n" + xhr.status + " " + xhr.statusText);
 					}
 				});
 			}
-		}
+		};
+		//TODO : Quiz의 각 질문들을 추가하는 기능
 		var addQuestionInput = function() {
 			
-		}
-		document.addEventListener("DOMContentLoaded", function() {
+		};
+		//TODO : request한 quiz의 결과 리스트를 출력하는 기능
+		var printQuizList = function() {
+			
+		};
+		var requestQuizList = function() {
 			$.ajax({
 				type: "post",
 				url: "/quiz/list",
@@ -99,6 +98,9 @@
 					alert("request failed...\n" + xhr.status + " " + xhr.statusText);
 				}
 			});
+		};
+		document.addEventListener("DOMContentLoaded", function() {
+			requestQuizList();
 		});
 		</script>
 	</head>

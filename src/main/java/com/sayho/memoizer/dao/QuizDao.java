@@ -15,6 +15,10 @@ public class QuizDao {
 	private static String NAME_SPACE = "com.sayho.memoizer.dao.QuizDao.";
  
  	public List<Map<String, Object>> quizList(){
- 		return sqlSession.selectList(NAME_SPACE+"testQuery");
+ 		return sqlSession.selectList(NAME_SPACE+"list");
+	}
+ 	
+ 	public int insertQuiz(Map<String, Object> record){
+ 		return sqlSession.insert(NAME_SPACE+"insertQuiz", record);
 	}
 }

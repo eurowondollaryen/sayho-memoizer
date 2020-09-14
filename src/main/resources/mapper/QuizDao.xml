@@ -3,20 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sayho.memoizer.dao.QuizDao">
-  <select id="testQuery" parameterType="java.util.Map" resultType="java.util.Map">
+  <select id="list" parameterType="java.util.Map" resultType="java.util.Map">
     SELECT SEQ,
            USR_ID,
            QUIZ_NM,
            FREG_TIME
     FROM ICTQUIZ
   </select>
-  <!-- 
-  <insert id="insertUser"
-          parameterType="org.ltis.klid.ttprsvr.model.Ttpr001">
-    insert into ttpr001(userid, username, age)
-    values(#{userid}, #{username}, #{age})
-  </insert> 
-  
+  <insert id="insertQuiz" parameterType="com.sayho.memoizer.dao.QuizDao">
+    INSERT INTO ICTQUIZ(SEQ, USR_ID, QUIZ_NM, FREG_TIME)
+    VALUES(NEXTVAL('SQ_ICTQUIZ'), #{usrId}, #{quizNm}, TO_CHAR(NOW(), 'YYYYMMDDHH24MISS'))
+  </insert>
+  <!--
   <update id="updateUser"
           parameterType="org.ltis.klid.ttprsvr.model.Ttpr001">
   UPDATE ttpr001 
