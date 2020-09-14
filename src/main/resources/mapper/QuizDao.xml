@@ -2,19 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sayho.memoizer.dao.MainDao">
-  <select id="testQuery" parameterType="String" resultType="java.util.List">
-    SELECT WO_DIV WODIV,
-           PART_MAIN_COD PARTMAINCOD,
-           PART_MAIN_NM PARTMAINNM,
-           PART_SUB_COD PARTSUBCOD,
-           PART_SUB_NM PARTSUBNM,
-           WO_COD WOCOD,
-           WO_NM_EN WONMEN,
-           WO_NM_KOR WONMKOR,
-           WEIGHT_RATE WEIGHTRATE
-    FROM COMWORKOUTS
-  </select> 
+<mapper namespace="com.sayho.memoizer.dao.QuizDao">
+  <select id="testQuery" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT SEQ,
+           USR_ID,
+           QUIZ_NM,
+           FREG_TIME
+    FROM ICTQUIZ
+  </select>
   <!-- 
   <insert id="insertUser"
           parameterType="org.ltis.klid.ttprsvr.model.Ttpr001">

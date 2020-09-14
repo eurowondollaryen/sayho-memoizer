@@ -61,7 +61,7 @@
 			} else {
 				$.ajax({
 					type: "post",
-					url: "/wr/selectWorkoutRecord",
+					url: "/quiz/regist",
 					data: requestData,
 					success: function(result) {
 						console.log('requesting workout record success!');
@@ -86,6 +86,20 @@
 		var addQuestionInput = function() {
 			
 		}
+		document.addEventListener("DOMContentLoaded", function() {
+			$.ajax({
+				type: "post",
+				url: "/quiz/list",
+				data: {"usrId" : "sehoakasayho"},
+				success: function(result) {
+					console.log('request success');
+					console.log(result);
+				},
+				error : function(xhr, textStatus, errorThrown) {
+					alert("request failed...\n" + xhr.status + " " + xhr.statusText);
+				}
+			});
+		});
 		</script>
 	</head>
 	<body>
