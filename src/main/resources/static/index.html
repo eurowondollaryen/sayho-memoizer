@@ -31,6 +31,7 @@
 			}
 		</style>
 		<script>
+		/* FOR TEST */
 		var alertContents = function() {
 			if(this.readyState === XMLHttpRequest.DONE) {
 				if(this.status === 200) {
@@ -51,6 +52,7 @@
 			httpRequest.open('POST', '/main', true);
 			httpRequest.send({'test':'hello'});
 		};
+		/* FOR TEST */
 		var showAdd = function() {
 			document.getElementById("inpTitle").value = "";
 			$("#myModal").modal();
@@ -70,6 +72,7 @@
 					data: requestData,
 					success: function(result) {
 						console.log('insert result : ' + result);
+						requestQuizList();
 					},
 					error : function(xhr, textStatus, errorThrown) {
 						alert("failed to insert data...\n" + xhr.status + " " + xhr.statusText);
@@ -81,9 +84,32 @@
 		var addQuestionInput = function() {
 			
 		};
-		//TODO : request한 quiz의 결과 리스트를 출력하는 기능
-		var printQuizList = function() {
-			
+		//TODO : request한 quiz의 결과 리스트를 출력하는 기능 (OK)
+		var printQuizList = function(quizList) {
+			var quizListArea = document.getElementById("quizListArea");
+			quizListArea.innerHTML = "";
+			for(var i = 0; i < quizList.length; ++i) {
+				var addElem = document.createElement("DIV");
+				addElem.setAttribute("class", "card shadow");
+				var addElem1 = document.createElement("DIV");
+				addElem1.setAttribute("class", "container sayho-updown");
+				addElem1.innerHTML = "<h3><strong>" + quizList[i]["quiz_nm"] + "</strong></h3>"
+				+ "<p>- " + "x 건의 질문" + "</p>"
+				+ "<button class='btn btn-primary' onClick='addQuestion(" + quizList[i]["seq"] + ")'>질문 추가하기</button>"
+				+ "<button class='btn btn-primary' onClick='startQuiz(" + quizList[i]["seq"] + ")'>퀴즈 풀기</button>"
+				+ "<button class='btn btn-danger' onClick='deleteQuiz(" + quizList[i]["seq"] + ")'>퀴즈 삭제</button>";
+				addElem.appendChild(addElem1);
+				quizListArea.appendChild(addElem);
+			}
+		};
+		var addQuestion = function(seq) {
+			//TODO : 질문 추가 MODAL
+		};
+		var startQuiz = function(seq) {
+			//퀴즈 풀기 기능 시작
+		};
+		var deleteQuiz = function(seq) {
+			//해당 SEQ의 퀴즈 삭제 request
 		};
 		var requestQuizList = function() {
 			$.ajax({
@@ -93,6 +119,7 @@
 				success: function(result) {
 					console.log('request success');
 					console.log(result);
+					printQuizList(result.data);
 				},
 				error : function(xhr, textStatus, errorThrown) {
 					alert("request failed...\n" + xhr.status + " " + xhr.statusText);
@@ -122,7 +149,7 @@
 				</div>
 			</div>
 		</div>
-		<div id="quizlist">
+		<div class="container sayho-updown" id="quizListArea">
 		</div>
 		<div class="sayho-footer bg-primary text-white">
 			<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank">eurowondollaryen</a>.</p>
