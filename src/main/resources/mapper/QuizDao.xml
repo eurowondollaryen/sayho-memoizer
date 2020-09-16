@@ -10,10 +10,15 @@
            FREG_TIME
     FROM ICTQUIZ
   </select>
-  <insert id="insertQuiz" parameterType="com.sayho.memoizer.dao.QuizDao">
+  <insert id="insertQuiz" parameterType="java.util.Map">
     INSERT INTO ICTQUIZ(SEQ, USR_ID, QUIZ_NM, FREG_TIME)
     VALUES(NEXTVAL('SQ_ICTQUIZ'), #{usrId}, #{quizNm}, TO_CHAR(NOW(), 'YYYYMMDDHH24MISS'))
   </insert>
+  <delete id="deleteQuiz" parameterType="java.util.Map">
+    DELETE FROM ICTQUIZ
+    WHERE USR_ID = #{usrId}
+    AND SEQ = CAST(#{seq} AS INTEGER)
+  </delete>
   <!--
   <update id="updateUser"
           parameterType="org.ltis.klid.ttprsvr.model.Ttpr001">

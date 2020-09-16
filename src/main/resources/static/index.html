@@ -108,8 +108,24 @@
 		var startQuiz = function(seq) {
 			//퀴즈 풀기 기능 시작
 		};
+		
+		//delete quiz
 		var deleteQuiz = function(seq) {
-			//해당 SEQ의 퀴즈 삭제 request
+			$.ajax({
+				type: "post",
+				url: "/quiz/delete",
+				data: {
+					   "usrId" : "sehoakasayho",
+					   "seq" : seq
+					   },
+				success: function(result) {
+					console.log('delete success');
+					requestQuizList();
+				},
+				error : function(xhr, textStatus, errorThrown) {
+					alert("delete request failed...\n" + xhr.status + " " + xhr.statusText);
+				}
+			});
 		};
 		var requestQuizList = function() {
 			$.ajax({

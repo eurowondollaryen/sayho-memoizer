@@ -21,4 +21,8 @@ public class QuizDao {
  	public int insertQuiz(Map<String, Object> record){
  		return sqlSession.insert(NAME_SPACE+"insertQuiz", record);
 	}
+ 	
+ 	public int deleteQuiz(Map<String, Object> record){
+ 		return sqlSession.delete(NAME_SPACE+"deleteQuiz", record);
+	}
 }

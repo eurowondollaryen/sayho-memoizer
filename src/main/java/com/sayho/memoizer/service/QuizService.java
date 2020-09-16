@@ -19,5 +19,9 @@ public class QuizService {
 	
 	public int insertQuiz(Map<String, Object> record){
 		return dao.insertQuiz(record);
-}
+	}
+	
+	public int deleteQuiz(Map<String, Object> record){
+		return dao.deleteQuiz(record);
+	}
 }

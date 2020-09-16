@@ -31,12 +31,22 @@ public class QuizController {
 	}
 	
 	@RequestMapping("/quiz/regist")
-	public Map<String, Object> insertWorkoutRecord(@RequestParam Map<String, Object> record,
+	public Map<String, Object> insertQuiz(@RequestParam Map<String, Object> record,
 			HttpServletRequest request) throws Exception {
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", true);
 		result.put("datetime", new Date());
 		result.put("data", service.insertQuiz(record));
+		return result;
+	}
+	
+	@RequestMapping("/quiz/delete")
+	public Map<String, Object> deleteQuiz(@RequestParam Map<String, Object> record,
+			HttpServletRequest request) throws Exception {
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", true);
+		result.put("datetime", new Date());
+		result.put("data", service.deleteQuiz(record));
 		return result;
 	}
 }
