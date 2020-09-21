@@ -56,7 +56,7 @@
 		/* FOR TEST */
 		var showAdd = function() {
 			document.getElementById("inpTitle").value = "";
-			$("#myModal").modal();
+			$("#inpTitleModal").modal();
 		};
 		
 		//TODO : Quiz의 각 질문들을 추가하는 기능
@@ -82,14 +82,17 @@
 			}
 		};
 		var addQuestion = function(seq) {
-			//TODO : 질문 추가 MODAL
+			//TODO : modal 출력 전 값 세팅
+			
+			//질문 추가 modal 출력
+			$("#inpQuestionModal").modal();
 		};
 		var startQuiz = function(seq) {
 			//퀴즈 풀기 기능 시작
 		};
 		
 		document.addEventListener("DOMContentLoaded", function() {
-			requestQuizList();
+			requestQuizList(global_quiz_list);
 		});
 		</script>
 	</head>
@@ -116,8 +119,8 @@
 		<div class="sayho-footer bg-primary text-white">
 			<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank">eurowondollaryen</a>.</p>
 		</div>
-		<!-- The Modal -->
-		<div class="modal fade" id="myModal">
+		<!-- title input Modal -->
+		<div class="modal fade" id="inpTitleModal">
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -137,7 +140,41 @@
 					</div>
 			        
 			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-primary" onClick="register()" data-dismiss="modal">등록</button>
+			        	<button type="button" class="btn btn-primary" onClick="registQuiz()" data-dismiss="modal">퀴즈 생성하기</button>
+			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+			        </div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- question input Modal -->
+		<div class="modal fade" id="inpQuestionModal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">질문 추가하기</h4>
+						<button type="button" class="close" data-dismiss="modal">×</button>
+					</div>
+					
+					<div class="modal-body">
+						<div class="container">
+							<div class="row">
+								<label for="inpQuestion">질문</label>
+								<input class="form-control" type="text" placeholder="질문을 입력하세요." id="inpQuestion"/>
+							</div>
+							<div class="row">
+								<label for="inpAnswer">답변</label>
+								<input class="form-control" type="text" placeholder="답변을 입력하세요." id="inpAnswer"/>
+							</div>
+							<div class="row">
+								<label for="inpFile">파일로 질문/답변 추가하기</label>
+								<!-- TODO : file input -->
+							</div>
+						</div>
+					</div>
+			        
+			        <div class="modal-footer">
+			        	<button type="button" class="btn btn-primary" onClick="registQuestion()" data-dismiss="modal">질문 등록하기</button>
 			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			        </div>
 				</div>

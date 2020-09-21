@@ -1,4 +1,7 @@
-const register = function() {
+/* GLOBAL VARS */
+var global_quiz_list = [];
+//insert
+const registQuiz = function() {
 	var quizTitle = document.getElementById("inpTitle").value; 
 	if(quizTitle === "") {
 		alert("제목을 입력해 주세요!");
@@ -13,7 +16,7 @@ const register = function() {
 			data: requestData,
 			success: function(result) {
 				console.log('insert result : ' + result);
-				requestQuizList();
+				requestQuizList(global_quiz_list);
 			},
 			error : function(xhr, textStatus, errorThrown) {
 				alert("failed to insert data...\n" + xhr.status + " " + xhr.statusText);
@@ -33,14 +36,15 @@ const deleteQuiz = function(seq) {
 			   },
 		success: function(result) {
 			console.log('delete success');
-			requestQuizList();
+			requestQuizList(global_quiz_list);
 		},
 		error : function(xhr, textStatus, errorThrown) {
 			alert("delete request failed...\n" + xhr.status + " " + xhr.statusText);
 		}
 	});
 };
-const requestQuizList = function() {
+//select
+const requestQuizList = function(copy_arr) {
 	$.ajax({
 		type: "post",
 		url: "/quiz/list",
@@ -48,6 +52,9 @@ const requestQuizList = function() {
 		success: function(result) {
 			console.log('request success');
 			console.log(result);
+			for(var i = 0; i < result.data.length; ++i) {
+				copy_arr[i] = result.data[i];
+			}
 			printQuizList(result.data);
 		},
 		error : function(xhr, textStatus, errorThrown) {
