@@ -1,4 +1,4 @@
-var register = function() {
+const register = function() {
 	var quizTitle = document.getElementById("inpTitle").value; 
 	if(quizTitle === "") {
 		alert("제목을 입력해 주세요!");
@@ -23,9 +23,9 @@ var register = function() {
 };
 
 //delete quiz
-var deleteQuiz = function(seq) {
+const deleteQuiz = function(seq) {
 	$.ajax({
-		type: "post",
+		type: "delete",
 		url: "/quiz/delete",
 		data: {
 			   "usrId" : "sehoakasayho",
@@ -40,7 +40,7 @@ var deleteQuiz = function(seq) {
 		}
 	});
 };
-var requestQuizList = function() {
+const requestQuizList = function() {
 	$.ajax({
 		type: "post",
 		url: "/quiz/list",

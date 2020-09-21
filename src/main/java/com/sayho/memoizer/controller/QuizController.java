@@ -8,6 +8,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -19,8 +21,12 @@ import com.sayho.memoizer.service.QuizService;
 public class QuizController {
 	@Autowired
 	QuizService service;
-	
-	@RequestMapping("/quiz/list")
+	/*
+	 * 2020.09.21
+	 * @RequestMapping -> @PostMapping, @DeleteMapping 으로 수정하여
+	 * 각 Controller의 endpoint의 역할 및 request를 명확하게 한다.
+	 * */
+	@PostMapping("/quiz/list")
 	public Map<String, Object> list() throws Exception {//@Responsebody를 String 앞에 붙이면 문자열 그자체를 반환함
 		List<Map<String, Object>> quizList = service.quizList();
 		Map<String, Object> result = new HashMap<>();
@@ -30,7 +36,7 @@ public class QuizController {
 		return result;
 	}
 	
-	@RequestMapping("/quiz/regist")
+	@PostMapping("/quiz/regist")
 	public Map<String, Object> insertQuiz(@RequestParam Map<String, Object> record,
 			HttpServletRequest request) throws Exception {
 		Map<String, Object> result = new HashMap<>();
@@ -40,7 +46,7 @@ public class QuizController {
 		return result;
 	}
 	
-	@RequestMapping("/quiz/delete")
+	@DeleteMapping("/quiz/delete")
 	public Map<String, Object> deleteQuiz(@RequestParam Map<String, Object> record,
 			HttpServletRequest request) throws Exception {
 		Map<String, Object> result = new HashMap<>();

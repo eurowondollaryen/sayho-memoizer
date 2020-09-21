@@ -7,7 +7,7 @@
 		<script src="./js/jquery.min.js"></script>
 		<link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css">
 		<script src="./js/bootstrap/bootstrap.min.js"></script>
-		<script src="./js/sayho-request.js"></script>
+		<script src="./js/sayho/sayho-request.js"></script>
 		<!-- custom style -->
 		<link rel="stylesheet" href="./css/style_sayho.css">
 		<style>
@@ -58,29 +58,7 @@
 			document.getElementById("inpTitle").value = "";
 			$("#myModal").modal();
 		};
-		var register = function() {
-			var quizTitle = document.getElementById("inpTitle").value; 
-			if(quizTitle === "") {
-				alert("제목을 입력해 주세요!");
-			} else {
-				var requestData = {
-					"usrId" : "sehoakasayho",
-					"quizNm" : quizTitle
-				};
-				$.ajax({
-					type: "post",
-					url: "/quiz/regist",
-					data: requestData,
-					success: function(result) {
-						console.log('insert result : ' + result);
-						requestQuizList();
-					},
-					error : function(xhr, textStatus, errorThrown) {
-						alert("failed to insert data...\n" + xhr.status + " " + xhr.statusText);
-					}
-				});
-			}
-		};
+		
 		//TODO : Quiz의 각 질문들을 추가하는 기능
 		var addQuestionInput = function() {
 			
@@ -110,39 +88,6 @@
 			//퀴즈 풀기 기능 시작
 		};
 		
-		//delete quiz
-		var deleteQuiz = function(seq) {
-			$.ajax({
-				type: "post",
-				url: "/quiz/delete",
-				data: {
-					   "usrId" : "sehoakasayho",
-					   "seq" : seq
-					   },
-				success: function(result) {
-					console.log('delete success');
-					requestQuizList();
-				},
-				error : function(xhr, textStatus, errorThrown) {
-					alert("delete request failed...\n" + xhr.status + " " + xhr.statusText);
-				}
-			});
-		};
-		var requestQuizList = function() {
-			$.ajax({
-				type: "post",
-				url: "/quiz/list",
-				data: {"usrId" : "sehoakasayho"},
-				success: function(result) {
-					console.log('request success');
-					console.log(result);
-					printQuizList(result.data);
-				},
-				error : function(xhr, textStatus, errorThrown) {
-					alert("request failed...\n" + xhr.status + " " + xhr.statusText);
-				}
-			});
-		};
 		document.addEventListener("DOMContentLoaded", function() {
 			requestQuizList();
 		});
