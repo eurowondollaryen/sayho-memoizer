@@ -27,8 +27,11 @@ public class QuizController {
 	 * 각 Controller의 endpoint의 역할 및 request를 명확하게 한다.
 	 * */
 	@PostMapping("/quiz/list")
-	public Map<String, Object> list() throws Exception {//@Responsebody를 String 앞에 붙이면 문자열 그자체를 반환함
-		List<Map<String, Object>> quizList = service.quizList();
+	public Map<String, Object> list(@RequestParam Map<String, Object> record,
+			HttpServletRequest request) throws Exception {//@Responsebody를 String 앞에 붙이면 문자열 그자체를 반환함
+		
+		List<Map<String, Object>> quizList = service.quizList(record);
+		
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", true);
 		result.put("datetime", new Date());

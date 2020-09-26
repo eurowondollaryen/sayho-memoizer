@@ -13,9 +13,13 @@ public class QuizService {
 	@Autowired
 	QuizDao dao;
 	
-	public List<Map<String, Object>> quizList(){
-			return dao.quizList();
+	public List<Map<String, Object>> quizList(Map<String, Object> record){
+			return dao.quizList(record);
 	}
+	
+	public List<Map<String, Object>> questionList(Map<String, Object> record){
+		return dao.questionList(record);
+}
 	
 	public int insertQuiz(Map<String, Object> record){
 		return dao.insertQuiz(record);

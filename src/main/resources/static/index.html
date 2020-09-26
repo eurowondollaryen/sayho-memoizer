@@ -32,7 +32,7 @@
 			}
 		</style>
 		<script>
-		/* FOR TEST */
+		/* TEST START */
 		var alertContents = function() {
 			if(this.readyState === XMLHttpRequest.DONE) {
 				if(this.status === 200) {
@@ -53,18 +53,17 @@
 			httpRequest.open('POST', '/main', true);
 			httpRequest.send({'test':'hello'});
 		};
-		/* FOR TEST */
-		var showAdd = function() {
+		/* TEST END */
+		
+		//Quiz 추가 modal 출력
+		const showAdd = function() {
 			document.getElementById("inpTitle").value = "";
 			$("#inpTitleModal").modal();
 		};
 		
-		//TODO : Quiz의 각 질문들을 추가하는 기능
-		var addQuestionInput = function() {
-			
-		};
-		//TODO : request한 quiz의 결과 리스트를 출력하는 기능 (OK)
-		var printQuizList = function(quizList) {
+		//request한 quiz의 결과 리스트를 출력하는 기능
+		//quizList - quiz object list
+		const printQuizList = function(quizList) {
 			var quizListArea = document.getElementById("quizListArea");
 			quizListArea.innerHTML = "";
 			for(var i = 0; i < quizList.length; ++i) {
@@ -73,22 +72,31 @@
 				var addElem1 = document.createElement("DIV");
 				addElem1.setAttribute("class", "container sayho-updown");
 				addElem1.innerHTML = "<h3><strong>" + quizList[i]["quiz_nm"] + "</strong></h3>"
-				+ "<p>- " + "x 건의 질문" + "</p>"
-				+ "<button class='btn btn-primary' onClick='addQuestion(" + quizList[i]["seq"] + ")'>질문 추가하기</button>"
-				+ "<button class='btn btn-primary' onClick='startQuiz(" + quizList[i]["seq"] + ")'>퀴즈 풀기</button>"
-				+ "<button class='btn btn-danger' onClick='deleteQuiz(" + quizList[i]["seq"] + ")'>퀴즈 삭제</button>";
+				+ "<p>- " + "? 건의 질문" + "</p>"
+				+ "<button class='btn btn-primary' onClick='addQuestion(" + i + ")'>질문 추가하기</button>"
+				+ "<button class='btn btn-primary' onClick='startQuiz(" + i + ")'>퀴즈 풀기</button>"
+				+ "<button class='btn btn-danger' onClick='deleteQuiz(" + i + ")'>퀴즈 삭제</button>";
 				addElem.appendChild(addElem1);
 				quizListArea.appendChild(addElem);
 			}
 		};
-		var addQuestion = function(seq) {
-			//TODO : modal 출력 전 값 세팅
-			
-			//질문 추가 modal 출력
+		
+		//Quiz에 대한 질문 추가 modal 출력
+		const addQuestion = function(index) {
+			document.getElementById("inpQuestion").value = "";
+			document.getElementById("inpAnswer").value = "";
+			document.getElementById("modalQuestionTitle").innerHTML = "질문 추가하기 - " + global_quiz_list[index]["quiz_nm"];
 			$("#inpQuestionModal").modal();
 		};
-		var startQuiz = function(seq) {
-			//퀴즈 풀기 기능 시작
+		
+		//regist questions for a quiz
+		const registQuestion = function() {
+			var inpQuestion = document.getElementById("inpQuestion").value;
+			var inpAnswer = document.getElementById("inpAnswer").value;
+		}
+		const startQuiz = function(seq) {
+			//TODO : 퀴즈 풀기 기능 시작
+			
 		};
 		
 		document.addEventListener("DOMContentLoaded", function() {
@@ -152,7 +160,7 @@
 			<div class="modal-dialog modal-dialog-centered">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h4 class="modal-title">질문 추가하기</h4>
+						<h4 class="modal-title" id="modalQuestionTitle">질문 추가하기</h4>
 						<button type="button" class="close" data-dismiss="modal">×</button>
 					</div>
 					
@@ -160,14 +168,16 @@
 						<div class="container">
 							<div class="row">
 								<label for="inpQuestion">질문</label>
-								<input class="form-control" type="text" placeholder="질문을 입력하세요." id="inpQuestion"/>
+								<textarea class="form-control" placeholder="질문을 입력하세요." id="inpQuestion">
+								</textarea>
 							</div>
 							<div class="row">
 								<label for="inpAnswer">답변</label>
-								<input class="form-control" type="text" placeholder="답변을 입력하세요." id="inpAnswer"/>
+								<textarea class="form-control" placeholder="답변을 입력하세요." id="inpAnswer">
+								</textarea>
 							</div>
 							<div class="row">
-								<label for="inpFile">파일로 질문/답변 추가하기</label>
+								<label for="inpFile">[미완성]파일로 질문/답변 추가하기</label>
 								<!-- TODO : file input -->
 							</div>
 						</div>

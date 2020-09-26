@@ -3,12 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sayho.memoizer.dao.QuizDao">
-  <select id="list" parameterType="java.util.Map" resultType="java.util.Map">
+  <select id="quizList" parameterType="java.util.Map" resultType="java.util.Map">
     SELECT SEQ,
            USR_ID,
            QUIZ_NM,
            FREG_TIME
     FROM ICTQUIZ
+    WHERE USR_ID = #{usrId}
+  </select>
+  <select id="questionList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT SEQ,
+           USR_ID,
+           QUIZ_NM,
+           FREG_TIME
+    FROM ICTQUIZ
+    WHERE USR_ID = #{usrId}
   </select>
   <insert id="insertQuiz" parameterType="java.util.Map">
     INSERT INTO ICTQUIZ(SEQ, USR_ID, QUIZ_NM, FREG_TIME)
@@ -27,10 +36,5 @@
          age = #{age} 
    WHERE userid = #{userid}
   </update>
-  
-  <delete id="deleteUser" parameterType="int">
-  DELETE FROM ttpr001
-  WHERE userid = #{userid}
-  </delete>
 -->
 </mapper>

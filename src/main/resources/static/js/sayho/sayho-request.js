@@ -1,6 +1,7 @@
 /* GLOBAL VARS */
 var global_quiz_list = [];
-//insert
+
+//insert quiz
 const registQuiz = function() {
 	var quizTitle = document.getElementById("inpTitle").value; 
 	if(quizTitle === "") {
@@ -43,7 +44,8 @@ const deleteQuiz = function(seq) {
 		}
 	});
 };
-//select
+
+//select quiz list
 const requestQuizList = function(copy_arr) {
 	$.ajax({
 		type: "post",
