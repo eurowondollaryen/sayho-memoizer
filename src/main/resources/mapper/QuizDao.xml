@@ -10,14 +10,18 @@
            FREG_TIME
     FROM ICTQUIZ
     WHERE USR_ID = #{usrId}
+    ORDER BY SEQ
   </select>
   <select id="questionList" parameterType="java.util.Map" resultType="java.util.Map">
-    SELECT SEQ,
+    SELECT QUIZ_SEQ,
            USR_ID,
-           QUIZ_NM,
-           FREG_TIME
-    FROM ICTQUIZ
+           QUESTION,
+           ANSWER,
+           FREG_DT
+    FROM ICTQUESTION
     WHERE USR_ID = #{usrId}
+    AND QUIZ_SEQ = #{quizSeq}
+    ORDER BY QUIZ_SEQ, FREG_DT
   </select>
   <insert id="insertQuiz" parameterType="java.util.Map">
     INSERT INTO ICTQUIZ(SEQ, USR_ID, QUIZ_NM, FREG_TIME)
@@ -28,6 +32,10 @@
     WHERE USR_ID = #{usrId}
     AND SEQ = CAST(#{seq} AS INTEGER)
   </delete>
+  <insert id="insertQuestion" parameterType="java.util.Map">
+    INSERT INTO ICTQUESTION(QUIZ_SEQ, USR_ID, QUESTION, ANSWER, FREG_TIME)
+    VALUES(CAST(#{quizSeq} AS INTEGER), #{usrId}, #{question}, #{answer}, TO_CHAR(NOW(), 'YYYYMMDDHH24MISS'))
+  </insert>
   <!--
   <update id="updateUser"
           parameterType="org.ltis.klid.ttprsvr.model.Ttpr001">

@@ -8,29 +8,9 @@
 		<link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css">
 		<script src="./js/bootstrap/bootstrap.min.js"></script>
 		<script src="./js/sayho/sayho-request.js"></script>
+		<script src="./js/sayho/sayho-modal.js"></script>
 		<!-- custom style -->
 		<link rel="stylesheet" href="./css/style_sayho.css">
-		<style>
-			.sayho-footer {
-				position: fixed;
-				left: 0;
-				bottom: 0;
-				width : 100%;
-				text-align: center;
-				padding: 15px;
-			}
-			.sayho-updown {
-				padding-top: 20px;
-				padding-bottom: 20px;
-			}
-			.sayho-updown-1 {
-				padding-top: 10px;
-				padding-bottom: 10px;
-			}
-			h4 {
-				font-weight: bold;
-			}
-		</style>
 		<script>
 		/* TEST START */
 		var alertContents = function() {
@@ -55,11 +35,7 @@
 		};
 		/* TEST END */
 		
-		//Quiz 추가 modal 출력
-		const showAdd = function() {
-			document.getElementById("inpTitle").value = "";
-			$("#inpTitleModal").modal();
-		};
+		
 		
 		//request한 quiz의 결과 리스트를 출력하는 기능
 		//quizList - quiz object list
@@ -81,22 +57,9 @@
 			}
 		};
 		
-		//Quiz에 대한 질문 추가 modal 출력
-		const addQuestion = function(index) {
-			document.getElementById("inpQuestion").value = "";
-			document.getElementById("inpAnswer").value = "";
-			document.getElementById("modalQuestionTitle").innerHTML = "질문 추가하기 - " + global_quiz_list[index]["quiz_nm"];
-			$("#inpQuestionModal").modal();
-		};
-		
-		//regist questions for a quiz
-		const registQuestion = function() {
-			var inpQuestion = document.getElementById("inpQuestion").value;
-			var inpAnswer = document.getElementById("inpAnswer").value;
-		}
 		const startQuiz = function(seq) {
 			//TODO : 퀴즈 풀기 기능 시작
-			
+			//server에 request해서 해당 seq에 대한 question들을 불러와야 함.
 		};
 		
 		document.addEventListener("DOMContentLoaded", function() {
@@ -184,7 +147,7 @@
 					</div>
 			        
 			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-primary" onClick="registQuestion()" data-dismiss="modal">질문 등록하기</button>
+			        	<button type="button" class="btn btn-primary" id="btnRegistQuestion" onClick="registQuestion()" data-dismiss="modal">질문 등록하기</button>
 			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			        </div>
 				</div>

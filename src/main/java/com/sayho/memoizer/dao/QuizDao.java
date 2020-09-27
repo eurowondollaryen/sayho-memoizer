@@ -15,13 +15,11 @@ public class QuizDao {
 	private static String NAME_SPACE = "com.sayho.memoizer.dao.QuizDao.";
  
  	public List<Map<String, Object>> quizList(Map<String, Object> record){
- 		System.out.println(record.toString());
- 		System.out.println(record.get("usrId").toString().length());
- 		return sqlSession.selectList(NAME_SPACE+"quizList");
+ 		return sqlSession.selectList(NAME_SPACE+"quizList", record);
 	}
  	
  	public List<Map<String, Object>> questionList(Map<String, Object> record){
- 		return sqlSession.selectList(NAME_SPACE+"questionList");
+ 		return sqlSession.selectList(NAME_SPACE+"questionList", record);
 	}
  	
  	public int insertQuiz(Map<String, Object> record){
@@ -30,5 +28,9 @@ public class QuizDao {
  	
  	public int deleteQuiz(Map<String, Object> record){
  		return sqlSession.delete(NAME_SPACE+"deleteQuiz", record);
+	}
+
+ 	public int insertQuestion(Map<String, Object> record){
+ 		return sqlSession.insert(NAME_SPACE+"insertQuestion", record);
 	}
 }

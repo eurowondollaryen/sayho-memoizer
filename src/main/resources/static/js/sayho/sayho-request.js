@@ -1,6 +1,40 @@
 /* GLOBAL VARS */
 var global_quiz_list = [];
 
+//insert questions for a quiz
+const registQuestion = function(seq) {
+	var inpQuestion = document.getElementById("inpQuestion").value;
+	var inpAnswer = document.getElementById("inpAnswer").value;
+	if(inpQuestion === "") {
+		alert("질문을 입력해 주세요!");
+		return;
+	}
+	if(inpAnswer === "") {
+		alert("답변을 입력해 주세요!");
+		return;
+	}
+	
+	var requestData = {
+		"quizSeq" : seq,
+		"usrId" : "sehoakasayho",
+		"question" : inpQuestion,
+		"answer" : inpAnswer
+	};
+	
+	$.ajax({
+		type: "post",
+		url: "/quiz/registQuestion",
+		data: requestData,
+		success: function(result) {
+			console.log('insert question result : ' + result);
+			alert("질문 등록에 성공했습니다!");
+		},
+		error : function(xhr, textStatus, errorThrown) {
+			alert("failed to insert data...\n" + xhr.status + " " + xhr.statusText);
+		}
+	});
+}
+
 //insert quiz
 const registQuiz = function() {
 	var quizTitle = document.getElementById("inpTitle").value; 

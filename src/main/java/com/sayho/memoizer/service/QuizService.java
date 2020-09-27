@@ -28,4 +28,8 @@ public class QuizService {
 	public int deleteQuiz(Map<String, Object> record){
 		return dao.deleteQuiz(record);
 	}
+	
+	public int insertQuestion(Map<String, Object> record){
+		return dao.insertQuestion(record);
+	}
 }

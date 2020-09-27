@@ -38,35 +38,23 @@ body {
 	display: block;
 	width: 100%;
 }
-.sayho-calendar-left { text-align: left; }
-.sayho-calendar-right { text-align: right; }
-.sayho-calendar-title {
-	font-weight: bold;
-	font-size: 25px;
+
+.sayho-footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width : 100%;
 	text-align: center;
+	padding: 15px;
 }
-.sayho-sunday .sayho-date-number {
-	color: #F64C72;
+.sayho-updown {
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
-.sayho-saturday .sayho-date-number {
-	color: #4BB9F6;
+.sayho-updown-1 {
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
-/*
-.sayho-sunday {
-	background-color: #F64C72;
-}
-.sayho-saturday {
-	background-color: #4BB9F6;
-}
-*/
-.sayho-grayday {
-	background-color: #E5E5E5;
-}
-.workout-record {
-	width: 100%;
-	font-size: 10px;
-}
-.sayho-chart {
-	width: 100%;
-	height : 500px;
+h4 {
+	font-weight: bold;
 }

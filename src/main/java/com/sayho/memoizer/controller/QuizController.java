@@ -58,4 +58,14 @@ public class QuizController {
 		result.put("data", service.deleteQuiz(record));
 		return result;
 	}
+	
+	@PostMapping("/quiz/registQuestion")
+	public Map<String, Object> insertQuestion(@RequestParam Map<String, Object> record,
+			HttpServletRequest request) throws Exception {
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", true);
+		result.put("datetime", new Date());
+		result.put("data", service.insertQuestion(record));
+		return result;
+	}
 }
