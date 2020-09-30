@@ -12,7 +12,7 @@
 		<!-- custom style -->
 		<link rel="stylesheet" href="./css/style_sayho.css">
 		<script>
-		/* TEST START */
+		/* TEST SCRIPT START */
 		var alertContents = function() {
 			if(this.readyState === XMLHttpRequest.DONE) {
 				if(this.status === 200) {
@@ -33,9 +33,14 @@
 			httpRequest.open('POST', '/main', true);
 			httpRequest.send({'test':'hello'});
 		};
-		/* TEST END */
+		/* TEST SCRIPT END */
 		
-		
+		/*
+		* TODO : 엑셀 파일로 질문/답변 추가하기(sheet.js 사용)
+		* TODO : 로그인 기능 추가하기
+		* TODO : 질문 목록 조회하기(backend 완성, 화면에 rendering 필요)
+		* TODO : 질문 목록으로 무작위 퀴즈 진행하기
+		*/
 		
 		//request한 quiz의 결과 리스트를 출력하는 기능
 		//quizList - quiz object list
@@ -48,10 +53,10 @@
 				var addElem1 = document.createElement("DIV");
 				addElem1.setAttribute("class", "container sayho-updown");
 				addElem1.innerHTML = "<h3><strong>" + quizList[i]["quiz_nm"] + "</strong></h3>"
-				+ "<p>- " + "? 건의 질문" + "</p>"
-				+ "<button class='btn btn-primary' onClick='addQuestion(" + i + ")'>질문 추가하기</button>"
-				+ "<button class='btn btn-primary' onClick='startQuiz(" + i + ")'>퀴즈 풀기</button>"
-				+ "<button class='btn btn-danger' onClick='deleteQuiz(" + i + ")'>퀴즈 삭제</button>";
+				+ "<p>- " + quizList[i]["cnt"] + " 건의 질문" + "</p>"
+				+ "<button class='btn btn-success' onClick='addQuestion(" + i + ")'>질문 추가하기</button>"
+				+ "<button class='btn btn-info' onClick='startQuiz(" + quizList[i]["seq"] + ")'>퀴즈 보기</button>"
+				+ "<button class='btn btn-danger' onClick='deleteQuiz(" + quizList[i]["seq"] + ")'>퀴즈 삭제</button>";
 				addElem.appendChild(addElem1);
 				quizListArea.appendChild(addElem);
 			}
@@ -60,6 +65,8 @@
 		const startQuiz = function(seq) {
 			//TODO : 퀴즈 풀기 기능 시작
 			//server에 request해서 해당 seq에 대한 question들을 불러와야 함.
+			requestQuestionList(seq);
+			showQuestionModal();
 		};
 		
 		document.addEventListener("DOMContentLoaded", function() {
@@ -148,6 +155,29 @@
 			        
 			        <div class="modal-footer">
 			        	<button type="button" class="btn btn-primary" id="btnRegistQuestion" onClick="registQuestion()" data-dismiss="modal">질문 등록하기</button>
+			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+			        </div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<!-- question list Modal -->
+		<div class="modal fade" id="questionListModal">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4 class="modal-title">질문 목록</h4>
+						<button type="button" class="close" data-dismiss="modal">×</button>
+					</div>
+					
+					<div class="modal-body">
+						<div class="container" id="questionListArea">
+							
+						</div>
+					</div>
+			        
+			        <div class="modal-footer">
 			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			        </div>
 				</div>

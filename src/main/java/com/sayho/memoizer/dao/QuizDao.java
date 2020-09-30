@@ -22,12 +22,20 @@ public class QuizDao {
  		return sqlSession.selectList(NAME_SPACE+"questionList", record);
 	}
  	
+ 	public List<Map<String, Object>> questionCount(Map<String, Object> record){
+ 		return sqlSession.selectList(NAME_SPACE+"questionCount", record);
+	}
+ 	
  	public int insertQuiz(Map<String, Object> record){
  		return sqlSession.insert(NAME_SPACE+"insertQuiz", record);
 	}
  	
  	public int deleteQuiz(Map<String, Object> record){
  		return sqlSession.delete(NAME_SPACE+"deleteQuiz", record);
+	}
+ 	
+ 	public int deleteQuestion(Map<String, Object> record){
+ 		return sqlSession.delete(NAME_SPACE+"deleteQuestion", record);
 	}
 
  	public int insertQuestion(Map<String, Object> record){

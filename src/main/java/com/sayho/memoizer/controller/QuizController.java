@@ -29,13 +29,23 @@ public class QuizController {
 	@PostMapping("/quiz/list")
 	public Map<String, Object> list(@RequestParam Map<String, Object> record,
 			HttpServletRequest request) throws Exception {//@Responsebody를 String 앞에 붙이면 문자열 그자체를 반환함
-		
 		List<Map<String, Object>> quizList = service.quizList(record);
-		
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", true);
 		result.put("datetime", new Date());
 		result.put("data", quizList);
+		return result;
+	}
+	
+	@PostMapping("/quiz/questionList")
+	public Map<String, Object> questionList(@RequestParam Map<String, Object> record,
+			HttpServletRequest request) throws Exception {//@Responsebody를 String 앞에 붙이면 문자열 그자체를 반환함
+		List<Map<String, Object>> questionList = service.questionList(record);
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("status", true);
+		result.put("datetime", new Date());
+		result.put("data", questionList);
 		return result;
 	}
 	
@@ -55,7 +65,8 @@ public class QuizController {
 		Map<String, Object> result = new HashMap<>();
 		result.put("status", true);
 		result.put("datetime", new Date());
-		result.put("data", service.deleteQuiz(record));
+		//delete quiz and its question list
+		result.put("data", service.deleteQuiz(record) + ", " + service.deleteQuestion(record));
 		return result;
 	}
 	

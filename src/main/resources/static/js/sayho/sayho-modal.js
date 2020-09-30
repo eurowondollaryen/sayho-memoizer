@@ -16,3 +16,7 @@ const addQuestion = function(index) {
 	document.getElementById("btnRegistQuestion").setAttribute("onClick", "registQuestion(" + global_quiz_list[index]["seq"] + ")");
 	$("#inpQuestionModal").modal();
 };
+
+const showQuestionModal = function() {
+	$("#questionListModal").modal();
+};

@@ -26,8 +26,10 @@ const registQuestion = function(seq) {
 		url: "/quiz/registQuestion",
 		data: requestData,
 		success: function(result) {
-			console.log('insert question result : ' + result);
+			console.log('insert question result : ' + result["data"]);
 			alert("질문 등록에 성공했습니다!");
+			//등록 후 refresh
+			requestQuizList(global_quiz_list);
 		},
 		error : function(xhr, textStatus, errorThrown) {
 			alert("failed to insert data...\n" + xhr.status + " " + xhr.statusText);
@@ -50,7 +52,7 @@ const registQuiz = function() {
 			url: "/quiz/regist",
 			data: requestData,
 			success: function(result) {
-				console.log('insert result : ' + result);
+				console.log('insert result : ' + result["data"]);
 				requestQuizList(global_quiz_list);
 			},
 			error : function(xhr, textStatus, errorThrown) {
@@ -92,6 +94,25 @@ const requestQuizList = function(copy_arr) {
 				copy_arr[i] = result.data[i];
 			}
 			printQuizList(result.data);
+		},
+		error : function(xhr, textStatus, errorThrown) {
+			alert("request failed...\n" + xhr.status + " " + xhr.statusText);
+		}
+	});
+};
+
+//select question list
+const requestQuestionList = function(quizSeq) {
+	$.ajax({
+		type: "post",
+		url: "/quiz/questionList",
+		data: {
+			   "usrId" : "sehoakasayho",
+			   "quizSeq" : quizSeq
+			   },
+		success: function(result) {
+			console.log('request success');
+			console.log(result);
 		},
 		error : function(xhr, textStatus, errorThrown) {
 			alert("request failed...\n" + xhr.status + " " + xhr.statusText);

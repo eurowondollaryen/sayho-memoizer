@@ -19,7 +19,11 @@ public class QuizService {
 	
 	public List<Map<String, Object>> questionList(Map<String, Object> record){
 		return dao.questionList(record);
-}
+	}
+	
+	public List<Map<String, Object>> questionCount(Map<String, Object> record){
+		return dao.questionCount(record);
+	}
 	
 	public int insertQuiz(Map<String, Object> record){
 		return dao.insertQuiz(record);
@@ -27,6 +31,10 @@ public class QuizService {
 	
 	public int deleteQuiz(Map<String, Object> record){
 		return dao.deleteQuiz(record);
+	}
+	
+	public int deleteQuestion(Map<String, Object> record){
+		return dao.deleteQuestion(record);
 	}
 	
 	public int insertQuestion(Map<String, Object> record){
