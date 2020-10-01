@@ -3,6 +3,10 @@
 	font-family: "NanumGothic";
 	src: url("../fonts/NanumGothic/NanumGothic.woff") format('woff');
 }
+html {
+	position: relative;
+	min-height: 100%;
+}
 body {
 	font-family: "NanumGothic", sans-serif;
 	background-color: #F5F5F5;
@@ -38,7 +42,7 @@ body {
 	display: block;
 	width: 100%;
 }
-
+/*
 .sayho-footer {
 	position: fixed;
 	left: 0;
@@ -47,6 +51,7 @@ body {
 	text-align: center;
 	padding: 15px;
 }
+*/
 .sayho-updown {
 	padding-top: 20px;
 	padding-bottom: 20px;

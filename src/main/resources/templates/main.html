@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<meta charset="UTF-8">
+		<meta charset="UTF-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Memoizer - ErrorPage</title>
+		<title>Memoizer</title>
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="./css/bootstrap/bootstrap.min.css">
 		<script src="./js/bootstrap/bootstrap.min.js"></script>
@@ -18,18 +18,15 @@
 		    </li>
 		  </ul>
 		</nav>
-		<div class="sayho-updown">
-			<div class="container sayho-updown card shadow">
-				<h2 th:text="${'Error ' + status}"></h2>
-				<p th:text="${'path: ' + path}"></p>
-				<p th:text="${'status: ' + status}"></p>
-				<p th:text="${'timestamp: ' + timestamp}"></p>
-				<p th:text="${'error: ' + error}"></p>
-				<p th:text="${'errors: ' + errors}"></p>
-				<p th:text="${'exception: ' + exception}"></p>
-				<p th:text="${'message: ' + message}"></p>
-				<p th:text="${'trace: ' + trace}"></p>
+		<section class="jumbotron">
+			<h1>Memoizer</h1>
+			<h3>내가 개념을 알고 있는지 확인하는 가장 좋은 방법은 테스트 입니다.</h3>
+			
+		</section>
+		<footer class="page-footer font-small bg-primary">
+			<div class="footer-copyright text-center py-3" style="color:white">
+				<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank"><strong>eurowondollaryen</strong></a>.</p>
 			</div>
-		</div>
+		</footer>
 	</body>
 </html>

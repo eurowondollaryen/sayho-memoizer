@@ -8,16 +8,21 @@ public class MainController {
 	
 	@GetMapping("/")
 	public String index() {
-		return "/index.html";
+		return "/main.html";
 	}
 	
 	@GetMapping("/user/login")
 	public String login() {
-		return "/login.jsp";
+		return "/login.html";
 	}
 	
 	@GetMapping("/error")
 	public String error() {
 		return "/error.html";
+	}
+	
+	@GetMapping("/test")
+	public String test() {
+		return "/index.html";
 	}
 }

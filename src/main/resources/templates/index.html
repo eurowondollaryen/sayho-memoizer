@@ -73,6 +73,12 @@
 			requestQuizList(global_quiz_list);
 		});
 		</script>
+		<style>
+			.footer {
+				position: absolute;
+				bottom: 0;
+			}
+		</style>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-sm bg-primary navbar-dark">
@@ -81,7 +87,7 @@
 		      <a class="nav-link" href="#"><strong>Memoizer</strong></a>
 		    </li>
 		  </ul>
-		</nav>
+		</nav>		
 		<div class="container sayho-updown">
 			<div class="card shadow">
 				<!-- calendar area -->
@@ -94,9 +100,13 @@
 		</div>
 		<div class="container sayho-updown" id="quizListArea">
 		</div>
-		<div class="sayho-footer bg-primary text-white">
-			<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank">eurowondollaryen</a>.</p>
-		</div>
+		<footer class="page-footer font-small bg-primary">
+			<div class="footer-copyright text-center py-3" style="color:white">
+				<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank"><strong>eurowondollaryen</strong></a>.</p>
+			</div>
+		</footer>
+		
+		<!-- MODALS -->
 		<!-- title input Modal -->
 		<div class="modal fade" id="inpTitleModal">
 			<div class="modal-dialog modal-dialog-centered">
@@ -161,7 +171,6 @@
 			</div>
 		</div>
 		
-		
 		<!-- question list Modal -->
 		<div class="modal fade" id="questionListModal">
 			<div class="modal-dialog modal-dialog-centered">
@@ -183,6 +192,5 @@
 				</div>
 			</div>
 		</div>
-		
 	</body>
 </html>
