@@ -6,9 +6,9 @@
 * Quizlet과 차이점 : excel 파일을 통해 퀴즈 업로드 가능
 
 ## **2. 기술 스택**
-* BE : Spring Boot(Maven)
-* FE : thymeleaf
-* DB : PgSql
+* BE : Spring Boot(Maven) - 가장 개발이 편하기 때문에 사용
+* FE : thymeleaf - spring boot에서 서버사이드 java template engine으로 jsp보다 thymeleaf를 권장하므로(jsp는 HTML과 호환성이 좋지 않다.)
+* DB : PgSql - 탈 Oracle의 흐름에 대비하고 싶기도 하고 postgreSQL 학습해보고 싶기도 해서
 
 ## **3. 개선 방향**
-* MSA 학습을 위해 MSA 아키텍쳐 적용 예정
+* MSA 학습을 위해.. 꼭 필요하진 않지만 MSA 아키텍쳐 적용 예정
