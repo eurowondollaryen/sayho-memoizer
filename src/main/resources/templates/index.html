@@ -62,12 +62,27 @@
 				quizListArea.appendChild(addElem);
 			}
 		};
+		var jsonArrayToTable = function(jsonArray) {
+			var tableStr = "<table class='table'><thead><tr>"
+			+"<th scope='col'>순번</th>"
+			+"<th scope='col'>질문</th>"
+			+"<th scope='col'>답변</th></tr></thead>"
+			+"<tbody>";
+			for(var i = 0; i < jsonArray.length; ++i) {
+				tableStr += "<tr>";
+				tableStr += "<td>" + (i+1) + "</td>";
+				tableStr += "<td>" + jsonArray[i]["question"].substr(0, 10) + "</td>";
+				tableStr += "<td>" + jsonArray[i]["answer"].substr(0, 10) + "</td>";
+				tableStr += "</tr>";
+			}
+			tableStr += "</tbody></table>";
+			return tableStr;
+		}
 		
 		const startQuiz = function(seq) {
 			//TODO : 퀴즈 풀기 기능 시작
 			//server에 request해서 해당 seq에 대한 question들을 불러와야 함.
 			requestQuestionList(seq);
-			showQuestionModal();
 		};
 		
 		document.addEventListener("DOMContentLoaded", function() {
@@ -188,6 +203,7 @@
 					</div>
 			        
 			        <div class="modal-footer">
+			        	<button type="button" class="btn btn-success" data-dismiss="modal" id="startQuizBtn">퀴즈 시작하기</button>
 			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
 			        </div>
 				</div>

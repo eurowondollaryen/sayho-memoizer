@@ -1,5 +1,6 @@
 /* GLOBAL VARS */
 var global_quiz_list = [];
+var global_question_list = [];
 
 //insert questions for a quiz
 const registQuestion = function(seq) {
@@ -111,8 +112,15 @@ const requestQuestionList = function(quizSeq) {
 			   "quizSeq" : quizSeq
 			   },
 		success: function(result) {
-			console.log('request success');
+			console.log('question list request success!');
 			console.log(result);
+			//function jsonArrayToTable is in index.html
+			document.querySelector("#questionListArea").innerHTML = jsonArrayToTable(result.data);
+			global_question_list = result.data;
+			showQuestionModal();
+			document.querySelector("#startQuizBtn").addEventListener("click", (e) => {
+				//TODO : 새 탭을 띄워서 퀴즈를 진행하는 방식으로. 새 탭에 global_question_list 데이터를 넘겨준다.
+			});
 		},
 		error : function(xhr, textStatus, errorThrown) {
 			alert("request failed...\n" + xhr.status + " " + xhr.statusText);
