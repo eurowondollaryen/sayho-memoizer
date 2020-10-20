@@ -65,21 +65,23 @@ const registQuiz = function() {
 
 //delete quiz
 const deleteQuiz = function(seq) {
-	$.ajax({
-		type: "delete",
-		url: "/quiz/delete",
-		data: {
-			   "usrId" : "sehoakasayho",
-			   "seq" : seq
-			   },
-		success: function(result) {
-			console.log('delete success');
-			requestQuizList(global_quiz_list);
-		},
-		error : function(xhr, textStatus, errorThrown) {
-			alert("delete request failed...\n" + xhr.status + " " + xhr.statusText);
-		}
-	});
+	if(confirm("정말 삭제하시겠어요?")) {
+		$.ajax({
+			type: "delete",
+			url: "/quiz/delete",
+			data: {
+				   "usrId" : "sehoakasayho",
+				   "seq" : seq
+				   },
+			success: function(result) {
+				console.log('delete success');
+				requestQuizList(global_quiz_list);
+			},
+			error : function(xhr, textStatus, errorThrown) {
+				alert("delete request failed...\n" + xhr.status + " " + xhr.statusText);
+			}
+		});
+	}
 };
 
 //select quiz list
