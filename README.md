@@ -1,5 +1,6 @@
 # sayho-memoizer
-암기하기
+A web app that helps you to memorize things (words, quiz answers, etc..)
+
 ## **1. 개발 목적**
 * 한자, 단어, 면접 질문 등 암기하고자 하는 것을 테스트를 통해 효율적으로 학습하기 위함
 * Quizlet 서비스를 보고 영감을 받음.
