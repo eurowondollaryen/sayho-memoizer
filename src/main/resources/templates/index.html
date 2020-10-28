@@ -103,109 +103,135 @@
 		      <a class="nav-link" href="#"><strong>Memoizer</strong></a>
 		    </li>
 		  </ul>
-		</nav>		
-		<div class="container sayho-updown">
-			<div class="card shadow">
-				<!-- calendar area -->
-				<div class="container sayho-updown">
-					<h3><strong>암기하기</strong></h3>
-					<p>암기할 질문/답 리스트를 저장하여, 무작위 퀴즈를 만듭니다.</p>
-					<button class="btn btn-primary" onClick="showAdd()">퀴즈 생성하기</button>
+		</nav>
+		<!-- 비로그인 상태 출력 화면 -->
+		<div th:if="${session.currentUser eq null}">
+			<div class="container sayho-updown">
+				<div class="card shadow">
+					<div class="container sayho-updown">
+						<h3>로그인</h3>
+						<a th:href="${apiURL}"><img height="50" src="http://static.nid.naver.com/oauth/small_g_in.PNG"/></a>
+					</div>
 				</div>
 			</div>
 		</div>
-		<div class="container sayho-updown" id="quizListArea">
-		</div>
-		<footer class="page-footer font-small bg-primary">
-			<div class="footer-copyright text-center py-3" style="color:white">
-				<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank"><strong>eurowondollaryen</strong></a>.</p>
-			</div>
-		</footer>
-		
-		<!-- MODALS -->
-		<!-- title input Modal -->
-		<div class="modal fade" id="inpTitleModal">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">퀴즈 생성하기</h4>
-						<button type="button" class="close" data-dismiss="modal">×</button>
-					</div>
-					
-					<div class="modal-body">
-						<div class="container">
-							<div class="row">
-								<label for="inpTitle">제목</label>
-								<input class="form-control" type="text" placeholder="퀴즈의 제목을 입력하세요." id="inpTitle"/>
-							</div>
-							<div class="row" id="questionArea">
-							</div>
-						</div>
-					</div>
-			        
-			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-primary" onClick="registQuiz()" data-dismiss="modal">퀴즈 생성하기</button>
-			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			        </div>
+		<!-- 로그인 상태 출력 화면 -->
+		<div th:if="${session.currentUser ne null}">
+			<div class="conatiner sayho-updown">
+				<div class="card shadow">
+					<h3>이 부분은 로그인한 사용자한테만 보임</h3>
+			  		<pre th:text="${session.currentUser}"></pre>
+			  		<a th:href="${'/naver/getProfile?accessToken=' + session.currentAT}">Get User's Profile</a>
+			  		<a th:href="${'/naver/refreshToken?refreshToken=' + session.currentRT}">Refresh Token</a>
+			  		<a th:href="${'/naver/deleteToken?accessToken=' + session.currentAT}">Delete Token</a>
+			  		<a href="/naver/invalidate">로그아웃 (Invalidate Session)</a>
 				</div>
 			</div>
-		</div>
-		
-		<!-- question input Modal -->
-		<div class="modal fade" id="inpQuestionModal">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title" id="modalQuestionTitle">질문 추가하기</h4>
-						<button type="button" class="close" data-dismiss="modal">×</button>
+			<div class="container sayho-updown">
+				<div class="card shadow">
+					<!-- calendar area -->
+					<div class="container sayho-updown">
+						<h3><strong>암기하기</strong></h3>
+						<p>암기할 질문/답 리스트를 저장하여, 무작위 퀴즈를 만듭니다.</p>
+						<button class="btn btn-primary" onClick="showAdd()">퀴즈 생성하기</button>
 					</div>
-					
-					<div class="modal-body">
-						<div class="container">
-							<div class="row">
-								<label for="inpQuestion">질문</label>
-								<textarea class="form-control" placeholder="질문을 입력하세요." id="inpQuestion">
-								</textarea>
-							</div>
-							<div class="row">
-								<label for="inpAnswer">답변</label>
-								<textarea class="form-control" placeholder="답변을 입력하세요." id="inpAnswer">
-								</textarea>
-							</div>
-							<div class="row">
-								<label for="inpFile">[미완성]파일로 질문/답변 추가하기</label>
-								<!-- TODO : file input -->
-							</div>
-						</div>
-					</div>
-			        
-			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-primary" id="btnRegistQuestion" onClick="registQuestion()" data-dismiss="modal">질문 등록하기</button>
-			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			        </div>
 				</div>
 			</div>
-		</div>
-		
-		<!-- question list Modal -->
-		<div class="modal fade" id="questionListModal">
-			<div class="modal-dialog modal-dialog-centered">
-				<div class="modal-content">
-					<div class="modal-header">
-						<h4 class="modal-title">질문 목록</h4>
-						<button type="button" class="close" data-dismiss="modal">×</button>
-					</div>
-					
-					<div class="modal-body">
-						<div class="container" id="questionListArea">
-							
+			
+			
+			<div class="container sayho-updown" id="quizListArea">
+			</div>
+			<footer class="page-footer font-small bg-primary">
+				<div class="footer-copyright text-center py-3" style="color:white">
+					<p>Copyright &copy; 2020 <a href="https://github.com/eurowondollaryen" style="color:white" target="_blank"><strong>eurowondollaryen</strong></a>.</p>
+				</div>
+			</footer>
+			
+			<!-- MODALS -->
+			<!-- title input Modal -->
+			<div class="modal fade" id="inpTitleModal">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">퀴즈 생성하기</h4>
+							<button type="button" class="close" data-dismiss="modal">×</button>
 						</div>
+						
+						<div class="modal-body">
+							<div class="container">
+								<div class="row">
+									<label for="inpTitle">제목</label>
+									<input class="form-control" type="text" placeholder="퀴즈의 제목을 입력하세요." id="inpTitle"/>
+								</div>
+								<div class="row" id="questionArea">
+								</div>
+							</div>
+						</div>
+				        
+				        <div class="modal-footer">
+				        	<button type="button" class="btn btn-primary" onClick="registQuiz()" data-dismiss="modal">퀴즈 생성하기</button>
+				         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				        </div>
 					</div>
-			        
-			        <div class="modal-footer">
-			        	<button type="button" class="btn btn-success" data-dismiss="modal" id="startQuizBtn">퀴즈 시작하기</button>
-			         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
-			        </div>
+				</div>
+			</div>
+			
+			<!-- question input Modal -->
+			<div class="modal fade" id="inpQuestionModal">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="modalQuestionTitle">질문 추가하기</h4>
+							<button type="button" class="close" data-dismiss="modal">×</button>
+						</div>
+						
+						<div class="modal-body">
+							<div class="container">
+								<div class="row">
+									<label for="inpQuestion">질문</label>
+									<textarea class="form-control" placeholder="질문을 입력하세요." id="inpQuestion">
+									</textarea>
+								</div>
+								<div class="row">
+									<label for="inpAnswer">답변</label>
+									<textarea class="form-control" placeholder="답변을 입력하세요." id="inpAnswer">
+									</textarea>
+								</div>
+								<div class="row">
+									<label for="inpFile">[미완성]파일로 질문/답변 추가하기</label>
+									<!-- TODO : file input -->
+								</div>
+							</div>
+						</div>
+				        
+				        <div class="modal-footer">
+				        	<button type="button" class="btn btn-primary" id="btnRegistQuestion" onClick="registQuestion()" data-dismiss="modal">질문 등록하기</button>
+				         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				        </div>
+					</div>
+				</div>
+			</div>
+			
+			<!-- question list Modal -->
+			<div class="modal fade" id="questionListModal">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title">질문 목록</h4>
+							<button type="button" class="close" data-dismiss="modal">×</button>
+						</div>
+						
+						<div class="modal-body">
+							<div class="container" id="questionListArea">
+								
+							</div>
+						</div>
+				        
+				        <div class="modal-footer">
+				        	<button type="button" class="btn btn-success" data-dismiss="modal" id="startQuizBtn">퀴즈 시작하기</button>
+				         	<button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+				        </div>
+					</div>
 				</div>
 			</div>
 		</div>
