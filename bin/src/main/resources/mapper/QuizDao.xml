@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sayho.memoizer.dao.QuizDao">
+  <select id="quizList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT SEQ,
+           USR_ID,
+           QUIZ_NM,
+           FREG_TIME,
+           (SELECT COUNT(1) CNT
+            FROM ICTQUESTION
+            WHERE QUIZ_SEQ = SEQ) CNT
+    FROM ICTQUIZ
+    WHERE USR_ID = #{usrId}
+    ORDER BY SEQ
+  </select>
+  
+  <select id="questionList" parameterType="java.util.Map" resultType="java.util.Map">
+    SELECT QUIZ_SEQ,
+           USR_ID,
+           QUESTION,
+           ANSWER,
+           FREG_TIME
+    FROM ICTQUESTION
+    WHERE USR_ID = #{usrId}
+    AND QUIZ_SEQ = CAST(#{quizSeq} AS INTEGER)
+    ORDER BY QUIZ_SEQ, FREG_TIME
+  </select>
+  
+  <select id ="questionCount" parameterType="java.util.Map" resultType="Integer">
+  	SELECT COUNT(1) CNT
+  	FROM ICTQUESTION
+  	WHERE USR_ID = #{usrId}
+  	AND QUIZ_SEQ = CAST(#{quizSeq} AS INTEGER)
+  </select>
+  
+  <insert id="insertQuiz" parameterType="java.util.Map">
+    INSERT INTO ICTQUIZ(SEQ, USR_ID, QUIZ_NM, FREG_TIME)
+    VALUES(NEXTVAL('SQ_ICTQUIZ'), #{usrId}, #{quizNm}, TO_CHAR(NOW(), 'YYYYMMDDHH24MISS'))
+  </insert>
+  
+  <delete id="deleteQuiz" parameterType="java.util.Map">
+    DELETE FROM ICTQUIZ
+    WHERE USR_ID = #{usrId}
+    AND SEQ = CAST(#{seq} AS INTEGER)
+  </delete>
+  
+  <delete id="deleteQuestion" parameterType="java.util.Map">
+    DELETE FROM ICTQUESTION
+    WHERE QUIZ_SEQ = CAST(#{seq} AS INTEGER)
+  </delete>
+  
+  <insert id="insertQuestion" parameterType="java.util.Map">
+    INSERT INTO ICTQUESTION(QUIZ_SEQ, USR_ID, QUESTION, ANSWER, FREG_TIME)
+    VALUES(CAST(#{quizSeq} AS INTEGER), #{usrId}, #{question}, #{answer}, TO_CHAR(NOW(), 'YYYYMMDDHH24MISS'))
+  </insert>
+  <!--
+  <update id="updateUser"
+          parameterType="org.ltis.klid.ttprsvr.model.Ttpr001">
+  UPDATE ttpr001 
+     SET username = #{username},
+         age = #{age} 
+   WHERE userid = #{userid}
+  </update>
+-->
+</mapper>
